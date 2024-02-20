@@ -3,21 +3,21 @@ import csv
 import numpy as np
 from datetime import datetime
 
-def createDirectory(exams, createDummy=False):
+def create_directory(exams, create_dummy=False):
     """
-    createDirectory creates directories and text files based on Exam objects.
+    create_directory creates directories and text files based on Exam objects.
 
     :param 1: exams: List of Exam objects
         A list containing Exam objects representing exams.
 
-    :param 2: createDummy: bool, optional (default=False)
+    :param 2: create_dummy: bool, optional (default=False)
         If True, creates dummy folders and files; otherwise, creates folders and files based on Exam objects.
 
     :no return
     """
     for exam in exams:
         # different paths/folder names needed for dummy folder
-        if(createDummy):
+        if(create_dummy):
             file_name = exam.get_dst()[24:]
             folder_path = exam.get_dst()[:24]
             try:
@@ -45,9 +45,9 @@ def createDirectory(exams, createDummy=False):
         with open(folder_path+file_name, 'w') as file:
             file.write(contents)
 
-def createDummyFiles(filename, json_dict, compare_files_exams):
+def create_dummy_files(filename, json_dict, compare_files_exams):
     """
-    createDummyFiles generates a CSV file with dummy file information based on Exam objects.
+    create_dummy_files generates a CSV file with dummy file information based on Exam objects.
 
     :param 1: filename: str
         The name of the CSV file to be created.
@@ -72,7 +72,7 @@ def createDummyFiles(filename, json_dict, compare_files_exams):
             participant_id = exam.get_participant_id()
             ranid = json_dict[participant_id]["ranid"]
             date = exam.get_date()
-            days_between = countDaysBetween(str(date), str(json_dict[participant_id]["first_exam"]))
+            days_between = count_days_between(str(date), str(json_dict[participant_id]["first_exam"]))
             dst = "dummy_files/"+ranid+"/"+ranid+"_"+str(days_between)+"Days.txt"
             src = exam.get_dst()
             is_confirmed = exam.get_is_confirmed()
@@ -80,9 +80,9 @@ def createDummyFiles(filename, json_dict, compare_files_exams):
             writer.writerow([ranid, days_between, src, dst, is_confirmed]) # Write data into CSV
 
 
-def countDaysBetween(date1, date2):
+def count_days_between(date1, date2):
     """
-    countDaysBetween calculates the difference in days between two dates.
+    count_days_between calculates the difference in days between two dates.
 
     :param 1: date1: str
         The first date in the format YYYYMMDD.

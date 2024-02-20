@@ -5,9 +5,9 @@ from exam import Exam
 # Global variables
 directory = '..\src\data\.'
 
-def collectData():
+def collect_data():
     """
-    collectData iterates through the specified data folder,
+    collect_data iterates through the specified data folder,
     collecting participant IDs and dates of exams and creating Exam objects.
 
     :return: List of Exam objects
@@ -23,32 +23,32 @@ def collectData():
             exams.append(Exam(participant_id, 0, date, 0, "", "", "", 0))
     return exams
 
-def countData(participants_ids):
+def count_data(participants_ids):
     """
-    countData takes a list of participant IDs and counts the occurrences of each participant.
+    count_data takes a list of participant IDs and counts the occurrences of each participant.
 
     :param participants_ids: List of str
         A list containing participant IDs.
 
-    :return: Tuple (participants: dict, examCount: int)
+    :return: Tuple (participants: dict, exam_count: int)
         - participants: A hashmap (dictionary) containing participant IDs as keys
                         and the number of occurrences as values.
-        - examCount: The total count of participant IDs.
+        - exam_count: The total count of participant IDs.
     """
-    examCount = 0
+    exam_count = 0
     participants = {} # Create hash map (participant, count)
     for participant in participants_ids:
-        examCount += 1
+        exam_count += 1
         if(participant in participants):
             participants[participant] += 1
         else: 
             participants[participant] = 1
 
-    return participants, examCount
+    return participants, exam_count
 
-def createCSVFromDirectory(filename):
+def create_CSV_from_directory(filename):
     """
-    createCSVFromDirectory creates a CSV file based on files in the specified directory.
+    create_CSV_from_directory creates a CSV file based on files in the specified directory.
 
     :param 1: filename: str
         The name of the CSV file to be created.
@@ -81,9 +81,9 @@ def createCSVFromDirectory(filename):
                 # write data into CSV
                 writer.writerow([participant_id, date, contents, filepath])
 
-def createCSVFromExams(exams, filename):
+def create_CSV_from_exams(exams, filename):
     """
-    createCSVFromExams creates a CSV file based on Exam objects.
+    create_CSV_from_exams creates a CSV file based on Exam objects.
 
     :param 1: exams: List of Exam objects
         A list containing Exam objects representing exams.
