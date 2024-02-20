@@ -1,5 +1,6 @@
 import os
 import csv
+import re
 from exam import Exam
 
 # Global variables
@@ -18,8 +19,8 @@ def collect_data():
     exams = [] # Create hash map (participant, count)
     for path, subdirs, files in os.walk(directory):
         for name in files:
-            date = name[10:20]
-            participant_id = name[3:9] # slice participants id (ex. PT-999999)
+            date = re.sub("", "", re.search("^[^_]*_(.*)\.[^.]*$", name).group(1).upper()) # regex to find date (ex. 2020_01_01)
+            participant_id = re.sub("", "", re.search("^[^_]*", name).group(0).upper()) # regex to find participants id (ex. PT-999999)
             exams.append(Exam(participant_id, 0, date, 0, "", "", "", 0))
     return exams
 
