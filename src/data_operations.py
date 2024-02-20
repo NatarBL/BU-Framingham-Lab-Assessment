@@ -1,6 +1,8 @@
 import os
 import csv
 from exam import Exam
+from collections import Counter
+
 
 # Global variables
 directory = '..\src\data\.'
@@ -35,16 +37,7 @@ def count_data(participants_ids):
                         and the number of occurrences as values.
         - exam_count: The total count of participant IDs.
     """
-    exam_count = 0
-    participants = {} # Create hash map (participant, count)
-    for participant in participants_ids:
-        exam_count += 1
-        if(participant in participants):
-            participants[participant] += 1
-        else: 
-            participants[participant] = 1
-
-    return participants, exam_count
+    return Counter(participants_ids), len(Counter(participants_ids))
 
 def create_CSV_from_directory(filename):
     """
