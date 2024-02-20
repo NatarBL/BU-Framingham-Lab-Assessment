@@ -62,11 +62,11 @@ def pull_exams(filename, confirmed_only=False, unconfirmed_only=False, is_dummy=
             exam = Exam(id, ranid, date, days_from_exam_one, contents, src, dst, is_confirmed)
 
             # confirmedOnly arg allows exams to store only confirmed exams, unconfirmed exams, or both
-            if confirmed_only == True and is_confirmed == "1":
+            if confirmed_only and is_confirmed == "1":
                 exams.append(exam)
-            elif unconfirmed_only == True and is_confirmed == "0":
+            elif unconfirmed_only and is_confirmed == "0":
                 exams.append(exam)
-            elif confirmed_only == False and unconfirmed_only == False:
+            elif not confirmed_only and unconfirmed_only == False:
                 exams.append(exam)
 
     return exams

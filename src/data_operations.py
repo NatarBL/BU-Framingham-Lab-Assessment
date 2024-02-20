@@ -2,7 +2,7 @@ import os
 import csv
 from exam import Exam
 from collections import Counter
-
+from datetime import datetime
 
 # Global variables
 directory = '..\src\data\.'
@@ -90,20 +90,22 @@ def create_CSV_from_exams(exams, filename):
     # create CSV based off of files in directory
     with open(filename, 'w', newline='') as file:
 
-        writer = csv.writer(file)
-        field = ["participant_id", "date", "contents", "src", "dst", "is_confirmed"]
-        writer.writerow(field) # Set column titles
+        headers = ["participant_id", "date", "contents", "src", "dst", "is_confirmed"]
+        writer = csv.DictWriter(file, headers) # Set column titles
+        writer.writeheader()
 
         # iterate through exams
         for exam in exams:
-            participant_id = exam.get_participant_id()
-            ranid = exam.get_ranid()
-            date = exam.get_date()
-            days_from_exam_one = exam.get_days_from_exam_one()
-            contents = exam.get_contents()
-            src = exam.get_src()
-            dst = exam.get_dst()
-            is_confirmed = exam.get_is_confirmed()
+
+            entry = {}
+            entry["participant_id"] = exam.get_participant_id()
+            # entry["ranid"] = exam.get_ranid()
+            entry["date"] = exam.get_date() # Could use datetime.strptime(exam.get_date(), date_format)
+            # entry["days_from_exam_one"] = exam.get_days_from_exam_one()
+            entry["contents"] = exam.get_contents()
+            entry["src"] = exam.get_src()
+            entry["dst"] = exam.get_dst()
+            entry["is_confirmed"] = exam.get_is_confirmed()
 
             # write data into CSV
-            writer.writerow([participant_id, date, contents, src, dst, is_confirmed])
+            writer.writerow(entry)
