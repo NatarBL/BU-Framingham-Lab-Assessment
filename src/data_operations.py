@@ -21,9 +21,6 @@ def collect_data():
         for name in files:
             date = re.sub("", "", re.search("^[^_]*_(.*)\.[^.]*$", name).group(1).upper()) # regex to find date (ex. 2020_01_01)
             participant_id = re.sub("", "", re.search("^[^_]*", name).group(0).upper()) # regex to find participants id (ex. PT-999999)
-            print("Id:", participant_id)
-            print("Date", date)
-            
             exams.append(Exam(participant_id, 0, date, 0, "", "", "", 0))
     return exams
 
