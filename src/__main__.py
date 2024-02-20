@@ -21,7 +21,7 @@ def main ():
     ## TASK 2 ## 
     # create a CSV file from the files in the 'data' folder
     print("\n### PART 2 ###")
-    create_CSV_from_directory('all_files.csv')
+    create_CSV_from_directory('all_files.csv') # Could collect_data() to create list of exam objects and then create_CSV_from_exams()
     print("Generated all_files.csv")
 
     ## TASK 3 ## 
