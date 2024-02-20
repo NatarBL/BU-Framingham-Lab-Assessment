@@ -26,19 +26,19 @@ def collect_data():
             exams.append(Exam(participant_id, 0, date, 0, "", "", "", 0))
     return exams
 
-def count_data(participants_ids):
+def count_data(exams):
     """
     count_data takes a list of participant IDs and counts the occurrences of each participant.
 
-    :param participants_ids: List of str
+    :param exams: List of str
         A list containing participant IDs.
 
-    :return: Tuple (participants: dict, exam_count: int)
+    :return: Tuple (exams: dict, len(Counter(exams)): int)
         - participants: A hashmap (dictionary) containing participant IDs as keys
                         and the number of occurrences as values.
-        - exam_count: The total count of participant IDs.
+        - len(Counter(exams)): The total count of participant IDs.
     """
-    return Counter(participants_ids), len(Counter(participants_ids))
+    return Counter(exams), len(Counter(exams))
 
 def create_CSV_from_directory(filename):
     """
