@@ -1,8 +1,85 @@
-# Bland FHS Research Programmer Interview README
+# Python file management exercise
 
 ## General Info
 
 **Python 3.9.7**
+
+## Tasks:
+
+- 1.) Search these files and report the overall number of participants and number of exams
+	- there should be 176 participants and 755 exams;
+- 2.) Generate a CSV named "all_files.csv" with the following columns:
+	- participant_id: the participant's ID
+		- "PT-120108"
+	- date: the date of the examination in YYYYMMDD format
+		- "19991005"
+	- contents: the integer found in the text file
+		- some integer
+	- filepath: relative path to the file
+		- "data/1999/120108_1999_10_05.txt"
+
+- Please see "sln/all_files.csv" for the correct CSV, as a point of comparison to check your work.
+
+- Please see "scheduled_visits.csv"
+	- it contains a participant_id and a date column
+	- these are the participant_id + date combinations that we should have files for
+	- there will be files that are NOT in this CSV and some that are in the CSV
+	- this is intentional and is meant to approximately simulate the reality of data files not matching to the record of the data we should have
+		- side note: this could happen for many reasons (scheduled_visits record hasn't been updated yet, data files were misnamed, etc.)
+
+- 3.) Compare the files found in data/ to the participant_id and dates found in "scheduled_visits.csv" and prepare for copying of the files. All confirmed files should go to a folder named confirmed_files/ and all unconfirmed files should go to a folder named unconfirmed_files/
+	- Generate a CSV named "compare_files.csv"
+	- compare_files.csv should have the following columns:
+		- participant_id:
+			- "PT-120108"
+		- date:
+			- "19991005"
+		- contents:
+			- some integer from the txt file contents
+		- src:
+			- "data/1999/120108_1999_10_05.txt"
+		- dst:
+			- "<confirmed_files or unconfirmed_files>/120108/120108_1999_10_05.txt"
+		- is_confirmed:
+			- 1 if in scheduled_visits.csv, 0 otherwise.
+
+- Please see "sln/compare_files.csv" as a point of comparison to check your work
+
+- 4.) Copy files to appropriate locations
+	- Use compare_files.csv to copy the files
+
+- 5.) Report the overall number of participants and number of exams for both confirmed and unconfirmed exams.
+	- The confirmed exams should have 133 participants with 251 exams
+	- The unconfirmed exams should include 162 participants with 504 exams
+	- Write a function to print out the above numbers based on your files.
+
+	- Please note that the confirmed participants and unconfirmed participants can overlap (e.g., a participant could have confirmed exam(s) and unconfirmed exam(s)), which means that we don't expect the number of participants with confirmed exams and unconfirmed exams to add up to 176.
+	- However, the number of exams should total 755 (251 + 504)
+
+- 6.) Create a copy of all the confirmed text files and replace the participant ID with a predefined random ID (ranid) and replace the date with the number of days between that date and the participant's first exam.
+	- Oftentimes, to protect sensitive participant data, we must replace the real participant ID with a random ID series and we have to replace the date with the number of days between that date and the participant's first exam date.
+	- This further protects the original participant identifier and removes the exact date of the exam, while still retaining the relative timing between different data points collected from the participant.
+
+	- Use ranid_linker.json to load the mapping between the participant id ("pt_id") and the random ID ("ranid") and the first exam date ("first_exam")
+
+	- Generate a CSV named "dummy_files.csv" by using "compare_files.csv" as an input.
+	- dummy_files.csv should have the following columns:
+		- ranid:
+			- "555-0106157" (the random ID)
+		- days_from_exam_one:
+			- 437 (the number of days between "first_exam" and "date")
+		- src:
+			- confirmed_files/... (using compare_files.csv "dst")
+		- dst:
+			- dummy_files/555-0106157/555-0106157_437Days.txt
+			- dummy_files/<ranid>/<ranid>_<days_from_exam_one>Days.txt
+		- is_confirmed:
+			- retain this column from compare_files.csv - note that we only want confirmed files (is_confirmed=1)
+
+	- Please see "sln/dummy_files.csv" as a point of comparison to check your work.
+
+- 7.) Copy files to appropriate locations.
+	- use dummy_files.csv to copy the files.
 
 ### Data
 
